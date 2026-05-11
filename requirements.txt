@@ -16,3 +16,6 @@ segno # generating QR code
 pillow # image preprocessing
 
 streamlit   
+
+librosa
+resemblyzer 
