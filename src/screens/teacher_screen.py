@@ -4,6 +4,8 @@ from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
 from src.database.db import check_teacher_exists, create_teacher, teacher_login, get_teacher_subjects
 from src.components.dialog_create_subject import create_subject_dialog
+from src.components.subject_card import subject_card
+from src.components.share_subject_dialog import share_subject_dialog
 
 
 def teacher_screen():
@@ -75,18 +77,18 @@ def teacher_tab_take_attendance():
 
 def teacher_tab_manage_subjects():
     teacher_id = st.session_state.teacher_data['teacher_id']
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2, vertical_alignment='center')
     with col1:
         st.header("Manage Subjects")
     with col2:
-        if st.button("Create New Subject", width='st', ):
+        if st.button("Create New Subject", width='stretch', ):
             create_subject_dialog(teacher_id)
 
     subjects = get_teacher_subjects(teacher_id)
     if subjects:
         for sub in subjects:
             stats = [
-                ('🧑‍🤝‍🧑', 'Students', sub['total_students'])
+                ('🧑‍🤝‍🧑', 'Students', sub['total_students']),
                 ('⏰', 'Classes', sub['total_classes'])
             ]
 
@@ -97,7 +99,7 @@ def teacher_tab_manage_subjects():
             subject_card(
                 name=sub['name'], code=sub['subject_code'], section=sub['section'], stats=stats, footer_callback=share_btn)
     else:
-        st.ifno('No Subject Found!. Create A new one')
+        st.info('No Subject Found!. Create A new one')
 
 
 def teacher_tab_attendance_records():
