@@ -1,5 +1,5 @@
 from src.pipelines.voice_pipeline import get_voice_embedding
-from src.pipelines.face_pipeline import predict_attendence
+from src.pipelines.face_pipeline import predict_attendance
 from PIL import Image
 import numpy as np
 import streamlit as st
@@ -32,7 +32,7 @@ def student_dashboard():
         st.header("Your Enrolled Subjects")
 
     with col2:
-        if st.button('Enrol in Subject', type='primary', width='stretch'):
+        if st.button('Enroll in Subject', type='primary', width='stretch'):
             enroll_dialog()
 
     st.divider()
@@ -116,7 +116,7 @@ def student_screen():
     if photo_source:
         img = np.array(Image.open(photo_source))
         with st.spinner('AI is scanning...'):
-            detected, all_ids, num_faces = predict_attendence(img)
+            detected, all_ids, num_faces = predict_attendance(img)
             if num_faces == 0:
                 st.warning('Face not found!')
             elif num_faces > 1:
