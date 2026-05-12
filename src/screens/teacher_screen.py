@@ -1,3 +1,4 @@
+from src.components.voice_attendance_dialog import voice_attendance_dialog
 import pandas as pd
 from datetime import datetime
 from PIL import Image
@@ -143,7 +144,7 @@ def teacher_tab_take_attendance():
                 enrolled_students = enrolled_res.data
 
                 if not enrolled_students:
-                    st.warning('No students in this course')
+                    st.warning('No students enrolled in this course')
                 else:
                     results, attendance_to_log = [], []
                     current_timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
@@ -171,7 +172,7 @@ def teacher_tab_take_attendance():
     with c3:
         if st.button('Use Voice Attendance', type='primary',
                      width='stretch', icon=':material/mic:'):
-            voice_attendance_dialog()
+            voice_attendance_dialog(selected_subject_id)
 
 
 def teacher_tab_manage_subjects():
